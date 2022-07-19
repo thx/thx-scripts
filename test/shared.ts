@@ -16,11 +16,12 @@ export const SPAWN_OPTIONS: SpawnOptions = {
 }
 
 export const validSubProcess = (subprocess: ChildProcess, options: SpawnOptions, done) => {
+  const LOG_PREFIX = `      ${gray('[thx-scripts]')}`
   if (subprocess.stdout) {
     subprocess.stdout.on('data', chunk => {
       console.log(
         chunk.toString().replace(/[\n\r]+$/g, '')
-          .split('\n').map(item => `      ${gray('[thx-scripts]')} ${item}`).join('\n')
+          .split('\n').map(item => `${LOG_PREFIX} ${item}`).join('\n')
       )
       // console.log('==> data', chunk.toString().replace(/[\n\r]+$/g, ''))
     })
@@ -28,20 +29,22 @@ export const validSubProcess = (subprocess: ChildProcess, options: SpawnOptions,
       if (error) console.error(error)
       expect(error).to.be.eq(undefined)
     })
-  // subprocess.stdout.on('close', () => console.log('==> stdout close'))
-  // subprocess.stdout.on('end', () => console.log('==> stdout end'))
+    // subprocess.stdout.on('close', () => console.log(LOG_PREFIX, '==> stdout close'))
+    // subprocess.stdout.on('end', () => console.log(LOG_PREFIX, '==> stdout end'))
   }
-  if (options.stdio !== 'ignore') {
-    subprocess.on('message', (message) => console.log('==> message', message))
-  }
+  subprocess.on('message', (message) => {
+    console.log(LOG_PREFIX, '==> subprocess message', message)
+  })
   subprocess.on('error', (error) => {
     if (error) console.error(error)
     expect(error).to.be.eq(undefined)
   })
   subprocess.on('exit', (code) => {
+    console.log(LOG_PREFIX, '==> subprocess exit', code)
     expect(code).to.be.oneOf([null, 0])
   })
   subprocess.on('close', (code) => {
+    console.log(LOG_PREFIX, '==> subprocess close', code)
     expect(code).to.be.oneOf([null, 0])
     done()
   })
