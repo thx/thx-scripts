@@ -2,12 +2,11 @@ import * as fse from 'fs-extra'
 import { join } from 'path'
 import { ChildProcess, SpawnOptions, SpawnSyncReturns } from 'child_process'
 import { expect } from 'chai'
-import { gray } from 'chalk'
 
 export const PLAYGROUND = join(__dirname, '../.playground')
 if (!fse.pathExistsSync(PLAYGROUND)) fse.mkdirSync(PLAYGROUND)
 
-export const EXAMPLE_REACT = join(__dirname, '../examples/react')
+export const EXAMPLE_REACT = join(__dirname, '../examples/react-app')
 
 export const SPAWN_OPTIONS: SpawnOptions = {
   stdio: 'ignore', // 'pipe',
@@ -16,35 +15,24 @@ export const SPAWN_OPTIONS: SpawnOptions = {
 }
 
 export const validSubProcess = (subprocess: ChildProcess, options: SpawnOptions, done) => {
-  const LOG_PREFIX = `      ${gray('[thx-scripts]')}`
   if (subprocess.stdout) {
-    subprocess.stdout.on('data', chunk => {
-      console.log(
-        chunk.toString().replace(/[\n\r]+$/g, '')
-          .split('\n').map(item => `${LOG_PREFIX} ${item}`).join('\n')
-      )
-      // console.log('==> data', chunk.toString().replace(/[\n\r]+$/g, ''))
-    })
+    subprocess.stdout.on('data', chunk => console.log(chunk.toString().replace(/[\n\r]+$/g, '')))
     subprocess.stdout.on('error', (error) => {
       if (error) console.error(error)
       expect(error).to.be.eq(undefined)
     })
-    // subprocess.stdout.on('close', () => console.log(LOG_PREFIX, '==> stdout close'))
-    // subprocess.stdout.on('end', () => console.log(LOG_PREFIX, '==> stdout end'))
+    subprocess.stdout.on('close', () => console.log('==> stdout close'))
+    subprocess.stdout.on('end', () => console.log('==> stdout end'))
   }
-  subprocess.on('message', (message) => {
-    console.log(LOG_PREFIX, '==> subprocess message', message)
-  })
+  subprocess.on('message', (message) => console.log('==> message', message))
   subprocess.on('error', (error) => {
     if (error) console.error(error)
     expect(error).to.be.eq(undefined)
   })
   subprocess.on('exit', (code) => {
-    console.log(LOG_PREFIX, '==> subprocess exit', code)
     expect(code).to.be.oneOf([null, 0])
   })
   subprocess.on('close', (code) => {
-    console.log(LOG_PREFIX, '==> subprocess close', code)
     expect(code).to.be.oneOf([null, 0])
     done()
   })
@@ -59,4 +47,10 @@ export const validSpawnSyncResult = (result: SpawnSyncReturns<Buffer>) => {
   expect(result.error).to.be.eq(undefined)
   // status
   expect(result.status).to.be.eq(0)
+}
+
+export async function delay (ms: number) {
+  await new Promise((resolve) => {
+    setTimeout(() => resolve(undefined), ms)
+  })
 }

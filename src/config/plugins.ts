@@ -13,7 +13,7 @@ import { getAppPath, getAppPkg, getAppRC } from '../utils'
 
 // 2022.3.17 支持多 webpack 配置实例
 import { getEntry } from '../shared/getEntry'
-const { PAGE } = process.env
+// const { PAGE } = process.env
 
 const WebpackBar = require('webpackbar')
 
@@ -76,7 +76,7 @@ export function factory (appConfig?: Configuration, appConfigIndex?: number, app
     }, {})
     // 2022.3.17 支持多 webpack 配置实例
     if (appConfig) {
-      exposes = Object.entries(getEntry(PAGE, appConfig)).reduce((acc, cur) => {
+      exposes = Object.entries(getEntry(undefined, appConfig)).reduce((acc, cur) => {
         const [name, path] = cur
         if (path) acc[`./${name}`] = path
         return acc

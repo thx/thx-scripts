@@ -4,7 +4,7 @@ import { IncomingMessage, ServerResponse } from 'http'
 import { grey, yellowBright, blueBright } from 'chalk'
 import { getAppPath, fixLength, getAppRC } from '../utils'
 
-const { MOCK, RAP_ID, RAP_HOST, PROXY_IP, PROXY_HTTPS } = process.env
+const { MOCK, RAP_ID, RAP_HOST, PROXY_IP, PROXY_PORT, PROXY_HTTPS } = process.env
 
 const RE_STATIC_SOURCE_EXTNAME = /^\.(js|css|bmp|gif|jpe?g|a?png|svg)$/
 const appPath = getAppPath()
@@ -75,12 +75,12 @@ if (MOCK && RAP_ID) {
          * }
          */
         // const nextUrl = `${mockProxy.target}${join('app', 'mock-scene', nextPath)}`
-        const nextUrl = `${nextTarget}${join('app', 'mock-scene', RAP_ID)}/${nextPath}`
+        const nextUrl = `${nextTarget}/${join('app', 'mock-scene', RAP_ID)}/${nextPath}`
         console.log(grey('🐡 [mock proxy]'), `${fixLength(req.method, 4)} ${yellowBright(path)} ${grey('=>')} ${blueBright(nextUrl)}`)
         return nextUrl
       }
 
-      const nextUrl = `${nextTarget}${join('app', 'mock', RAP_ID)}/${path}`
+      const nextUrl = `${nextTarget}/${join('app', 'mock', RAP_ID)}/${path}`
       console.log(grey('🐡 [mock proxy]'), `${fixLength(req.method, 4)} ${yellowBright(path)} ${grey('=>')} ${blueBright(nextUrl)}`)
       return nextUrl
     }
@@ -91,7 +91,7 @@ let ipProxy
 if (PROXY_IP) {
   ipProxy = {
     ...indexProxy,
-    target: `${PROXY_HTTPS ? 'https' : 'http'}://${PROXY_IP}`,
+    target: `${PROXY_HTTPS ? 'https' : 'http'}://${PROXY_IP}${PROXY_PORT ? `:${PROXY_PORT}` : ''}`,
     context: () => true,
     changeOrigin: false,
     secure: false,
@@ -99,7 +99,8 @@ if (PROXY_IP) {
       // if (/^\.(js|css|bmp|gif|jpe?g|png)$/.test(extname(req.url))) return
       // if (req.headers.accept?.indexOf('image') !== -1) return url
 
-      const nextUrl = `${ipProxy.target}${url[0] === '/' ? '' : '/'}${url}`
+      const nextTarget = ipProxy.target.replace(/\/$/, '')
+      const nextUrl = `${nextTarget}${url[0] === '/' ? '' : '/'}${url}`
       console.log(grey('🚐 [host proxy]'), `${fixLength(req.method, 4)} ${yellowBright(url)} ${grey('=>')} ${blueBright(nextUrl)}`)
       return nextUrl
     }
