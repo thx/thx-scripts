@@ -1,6 +1,6 @@
 {
   "name": "thx-scripts",
-  "version": "0.0.1-alpha.1",
+  "version": "0.0.1",
   "main": "build/index.js",
   "bin": {
     "thx-scripts": "build/index.js"
@@ -89,6 +89,7 @@
     "nodemon": "^2.0.19",
     "npm-run-all": "^4.1.5",
     "puppeteer": "^15.4.0",
+    "standard-version": "^9.5.0",
     "ts-node": "^10.9.1",
     "typescript": "^4.7.4"
   },
