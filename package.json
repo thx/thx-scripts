@@ -1,6 +1,6 @@
 {
   "name": "thx-scripts",
-  "version": "0.0.1",
+  "version": "0.0.1-alpha.2",
   "main": "build/index.js",
   "bin": {
     "thx-scripts": "build/index.js"
