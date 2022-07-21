@@ -81,7 +81,7 @@ const BUILD_ENV_MAP_LIST = DEV_ENV_MAP_LIST.map(
   }
 )
 
-describe(`${pkg.name} ${pkg.version} ${appPath}`, function () {
+describe(`${pkg.name} ${pkg.version} thx-scripts start ${appPath}`, function () {
   this.timeout(1 * 30 * 1000)
 
   DEV_ENV_MAP_LIST.forEach((testEnv, index) => {
@@ -103,6 +103,10 @@ describe(`${pkg.name} ${pkg.version} ${appPath}`, function () {
       await delay(1 * 1000)
     })
   })
+})
+
+describe(`${pkg.name} ${pkg.version} thx-scripts build ${appPath}`, function () {
+  this.timeout(1 * 30 * 1000)
 
   BUILD_ENV_MAP_LIST.forEach((testEnv, index) => {
     const counter = `${index + 1}/${DEV_ENV_MAP_LIST.length}`
