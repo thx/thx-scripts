@@ -1,0 +1,20 @@
+{
+  "webpack": {
+    "entry": {
+      "index": "./src/index.tsx",
+      "portal": "./src/portal.tsx",
+      "pages/foo/index": "./src/pages/foo/index.tsx",
+      "pages/bar/index": "./src/pages/bar/index.tsx",
+      "pages/faz/index": "./src/pages/faz/index.tsx"
+    },
+    "externals": {
+      "react": "React",
+      "react-dom": "ReactDOM",
+      "react-router-dom": "ReactRouterDOM",
+      "styled-components": "styled",
+      "@alifd/next": "Next"
+    },
+    "devServer": {}
+  },
+  "__unstable_auto_open": false
+}
