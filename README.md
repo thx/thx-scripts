@@ -30,7 +30,6 @@
 [![npm release version](https://img.shields.io/npm/v/thx-scripts.svg)](https://www.npmjs.com/package/thx-scripts)
 [![Typescript definitions](https://img.shields.io/npm/types/thx-scripts.svg)](https://www.npmjs.com/package/thx-scripts)
 
-
 ## 📦 Installation 安装
 
 ```shell
