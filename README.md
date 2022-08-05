@@ -1,6 +1,6 @@
 # THX Scripts
 
-微前端构建工具，内置支持 Webpack5 模块邦联（Module Federation）
+微前端构建工具，内置支持 Webpack5 模块邦联（Module Federation）。
 
 [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 ![](https://img.shields.io/badge/webapck-5-brightgreen)
