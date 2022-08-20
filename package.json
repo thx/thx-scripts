@@ -1,8 +1,11 @@
 {
   "name": "thx-scripts",
-  "version": "0.0.1-alpha.2",
+  "version": "0.0.1-alpha.3",
   "description": "微前端构建工具，内置支持 Webpack5 模块邦联。",
-  "keywords": ["micro-frontends-solution", "webpack5-module-federation"],
+  "keywords": [
+    "micro-frontends-solution",
+    "webpack5-module-federation"
+  ],
   "main": "build/index.js",
   "bin": {
     "thx-scripts": "build/index.js"
