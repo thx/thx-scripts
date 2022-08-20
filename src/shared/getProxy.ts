@@ -26,7 +26,7 @@ const indexProxy = {
     }
 
     // 本地文件，不需要重定向到 INDEX_HTML，并且跳过后续处理
-    const localPublicAssetPath = resolve(appPath, 'public', `.${req.url}`)
+    const localPublicAssetPath = resolve(appPath, 'public', `.${req.url.split('?')[0]}`)
     if (existsSync(localPublicAssetPath) && statSync(localPublicAssetPath).isFile()) {
       return req.url
     }
