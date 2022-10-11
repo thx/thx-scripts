@@ -8,7 +8,7 @@ export function hasGit (appPath = __dirname) {
 }
 
 /** 获取当前分支名称 */
-export function getGitBranch (appPath: string = __dirname) {
+export default function getGitBranch (appPath: string = __dirname) {
   if (!hasGit(appPath)) return undefined
   try {
     // ref: refs/heads/daily/0.0.1
