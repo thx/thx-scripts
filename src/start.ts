@@ -11,8 +11,7 @@ import { factory as pluginsFactory } from './config/plugins'
 import statsConfig from './config/stats'
 import { Configuration, Compiler } from 'webpack/types'
 
-import { getAppPath, getAppPkg, getAppRC, onetab } from './utils'
-import { getGitBranchVersion } from './utils/git'
+import { getAppPath, getAppPkg, getAppRC, onetab, getGitBranchVersion } from './utils'
 
 process.env.BABEL_ENV = 'development'
 process.env.NODE_ENV = 'development'

@@ -1,5 +1,4 @@
-import { getAppPath, getAppPkg } from '../utils'
-import { getGitBranchVersion } from '../utils/git'
+import { getAppPath, getAppPkg, getGitBranchVersion } from '../utils'
 
 const formatModuleFederationName = (str: string) => str.replace(/[^a-zA-Z\d]/g, '_').replace(/^(\d)/, '_$1')
 
