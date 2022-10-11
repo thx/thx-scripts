@@ -13,6 +13,8 @@ import { getAppPath, getAppPkg, getAppRC } from '../utils'
 
 // 2022.3.17 支持多 webpack 配置实例
 import { getEntry } from '../shared/getEntry'
+import { getGitBranchVersion } from '../shared/getGitBranch'
+import { formatModuleFederationName } from '../shared/formatModuleFederation'
 // const { PAGE } = process.env
 
 const WebpackBar = require('webpackbar')
@@ -21,8 +23,6 @@ const WebpackBar = require('webpackbar')
 // const cliProgressBar = new cliProgress.SingleBar({
 //   format: '[{bar}] {percentage}% | ETA: {eta}s | {value}/{total} | {message}'
 // }, cliProgress.Presets.legacy)
-
-export const formatModuleFederationName = (str: string) => str.replace(/[^a-zA-Z\d]/g, '_').replace(/^(\d)/, '_$1')
 
 const {
   NODE_ENV,
@@ -69,6 +69,7 @@ export function factory (appConfig?: Configuration, appConfigIndex?: number, app
     const appPkg = getAppPkg(appPath)
     const appName = appPkg.name // appPkg.name.replace(/[@/-]/g, '_')
     const appVersion = appPkg.version
+    const branchVersion = getGitBranchVersion(appPath)
     let exposes = Object.entries(entry).reduce((acc, cur) => {
       const [name, path] = cur
       if (path) acc[`./${name}`] = path
@@ -107,7 +108,7 @@ export function factory (appConfig?: Configuration, appConfigIndex?: number, app
     }
     const options: any = {
       name: appName,
-      library: { type: 'umd', name: formatModuleFederationName(`${appName}/${appVersion}`) },
+      library: { type: 'umd', name: formatModuleFederationName(`${appName}/${branchVersion || appVersion}`) },
       filename,
       exposes,
       shared,
