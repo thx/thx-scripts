@@ -1,6 +1,6 @@
 import { existsSync, readFileSync } from 'fs'
 import { join } from 'path'
-import { getAppPath } from '.'
+import { getAppPath } from './app'
 
 /** 是否已初始化 git */
 export function hasGit (appPath = __dirname) {
