@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.1-alpha.5](https://gitlab.alibaba-inc.com/mmfs/thx-scripts/compare/v0.0.1-alpha.4...v0.0.1-alpha.5) (2022-10-11)
+
+
+### Features
+
+* version check & log ([dee0efb](https://gitlab.alibaba-inc.com/mmfs/thx-scripts/commit/dee0efb3c5ad27a644a5f3607553ca060204db25))
+
 ### [0.0.1-alpha.4](https://gitlab.alibaba-inc.com/mmfs/thx-scripts/compare/v0.0.1-alpha.3...v0.0.1-alpha.4) (2022-10-11)
 
 
