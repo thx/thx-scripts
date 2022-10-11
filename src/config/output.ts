@@ -1,14 +1,9 @@
 import { join } from 'path'
-import { getGitBranchVersion } from '../shared/getGitBranch'
 import { Configuration } from 'webpack/types'
-import { formatModuleFederationName } from '../shared/formatModuleFederation'
-import { getAppPath, getAppPkg } from '../utils'
+import getModuleFederationLibrary from '../shared/getModuleFederationLibrary'
+import { getAppPath } from '../utils'
 
 const appPath = getAppPath()
-const appPkg = getAppPkg(appPath)
-const appName = appPkg.name // appPkg.name.replace(/[@/-]/g, '_')
-const appVersion = appPkg.version
-const branchVersion = getGitBranchVersion(appPath)
 
 // const { ASSET_PATH } = process.env
 const config: Configuration = {
@@ -19,7 +14,7 @@ const config: Configuration = {
     chunkFilename: '[id]_[contenthash].async.js',
     // publicPath: ASSET_PATH || '/'
     publicPath: 'auto',
-    library: formatModuleFederationName(`${appName}/${branchVersion || appVersion}`)
+    library: getModuleFederationLibrary(appPath)
   }
 }
 

@@ -1,1 +1,0 @@
-export const formatModuleFederationName = (str: string) => str.replace(/[^a-zA-Z\d]/g, '_').replace(/^(\d)/, '_$1')

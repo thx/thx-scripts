@@ -11,7 +11,8 @@ import { factory as pluginsFactory } from './config/plugins'
 import statsConfig from './config/stats'
 import { Configuration, Compiler } from 'webpack/types'
 
-import { getAppPath, getAppRC, onetab } from './utils'
+import { getAppPath, getAppPkg, getAppRC, onetab } from './utils'
+import { getGitBranchVersion } from './utils/git'
 
 process.env.BABEL_ENV = 'development'
 process.env.NODE_ENV = 'development'
@@ -33,6 +34,22 @@ appConfigArray.forEach(item => {
     output.path = join(process.cwd(), output.path)
   }
 })
+
+{
+  // 2022.10.11
+  // 获取 MF 版本号时，优先读取分支名称中的版本号，如果未取到，再读取 package.json 中的 version。
+  const appPkg = getAppPkg(appPath)
+  const appName = appPkg.name
+  const appVersion = appPkg.version
+  const branchVersion = getGitBranchVersion(appPath)
+  if (branchVersion && branchVersion !== appVersion) {
+    console.log()
+    console.log(yellowBright(`💢 发现不一致的 ${blueBright(appName)} 版本号：`))
+    console.log(yellowBright('⛔️ 忽略 package.json 中的 version：'), grey(appVersion))
+    console.log(yellowBright('💡 采用 git 分支名称中的版本号：'), whiteBright.bold(branchVersion))
+    console.log()
+  }
+}
 
 // 合并配置：默认配置 + 应用配置
 const webpackConfigArray = appConfigArray.map((appConfig, appConfigIndex, appConfigArray) => {

@@ -1,7 +1,7 @@
 import * as fs from 'fs'
 import { join } from 'path'
 
-import { WebpackPluginInstance, EnvironmentPlugin, HotModuleReplacementPlugin, container, DefinePlugin, ProvidePlugin } from 'webpack'
+import { WebpackPluginInstance, HotModuleReplacementPlugin, container, DefinePlugin, ProvidePlugin } from 'webpack'
 import { Configuration } from 'webpack/types'
 import * as HtmlWebpackPlugin from 'html-webpack-plugin'
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer'
@@ -13,8 +13,8 @@ import { getAppPath, getAppPkg, getAppRC } from '../utils'
 
 // 2022.3.17 支持多 webpack 配置实例
 import { getEntry } from '../shared/getEntry'
-import { getGitBranchVersion } from '../shared/getGitBranch'
-import { formatModuleFederationName } from '../shared/formatModuleFederation'
+
+import getModuleFederationLibrary from '../shared/getModuleFederationLibrary'
 // const { PAGE } = process.env
 
 const WebpackBar = require('webpackbar')
@@ -68,8 +68,6 @@ export function factory (appConfig?: Configuration, appConfigIndex?: number, app
   // const appPkg = require(join(process.cwd(), 'package.json'))
     const appPkg = getAppPkg(appPath)
     const appName = appPkg.name // appPkg.name.replace(/[@/-]/g, '_')
-    const appVersion = appPkg.version
-    const branchVersion = getGitBranchVersion(appPath)
     let exposes = Object.entries(entry).reduce((acc, cur) => {
       const [name, path] = cur
       if (path) acc[`./${name}`] = path
@@ -108,7 +106,7 @@ export function factory (appConfig?: Configuration, appConfigIndex?: number, app
     }
     const options: any = {
       name: appName,
-      library: { type: 'umd', name: formatModuleFederationName(`${appName}/${branchVersion || appVersion}`) },
+      library: { type: 'umd', name: getModuleFederationLibrary(appPath) },
       filename,
       exposes,
       shared,
