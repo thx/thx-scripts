@@ -14,7 +14,8 @@ const config: Configuration = {
     chunkFilename: '[id]_[contenthash].async.js',
     // publicPath: ASSET_PATH || '/'
     publicPath: 'auto',
-    library: getModuleFederationLibrary(appPath)
+    library: getModuleFederationLibrary(appPath),
+    crossOriginLoading: 'anonymous'
   }
 }
 
