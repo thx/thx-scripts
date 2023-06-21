@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.1-alpha.7](https://gitlab.alibaba-inc.com/mmfs/thx-scripts/compare/v0.0.1-alpha.6...v0.0.1-alpha.7) (2023-06-21)
+
+
+### Bug Fixes
+
+* [#1](https://gitlab.alibaba-inc.com/mmfs/thx-scripts/issues/1) ([1b6b3d3](https://gitlab.alibaba-inc.com/mmfs/thx-scripts/commit/1b6b3d34af75c941aaa2bafda9cbb1796efd0433))
+
 ### [0.0.1-alpha.6](https://gitlab.alibaba-inc.com/mmfs/thx-scripts/compare/v0.0.1-alpha.5...v0.0.1-alpha.6) (2022-10-11)
 
 ### [0.0.1-alpha.5](https://gitlab.alibaba-inc.com/mmfs/thx-scripts/compare/v0.0.1-alpha.4...v0.0.1-alpha.5) (2022-10-11)
