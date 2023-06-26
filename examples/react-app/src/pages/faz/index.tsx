@@ -4,7 +4,7 @@ export default () => {
   const [data, setData] = useState({})
   useEffect(() => {
     window.fetch('/faz', { method: 'POST' })
-      .then(resp => resp.json())
+      .then(resp => resp.status === 200 ? resp.json() : {})
       .then(json => setData(json))
   }, [])
   return <div>
