@@ -2,6 +2,8 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.1-alpha.8](https://github.com/thx/thx-scripts/compare/v0.0.1-alpha.7...v0.0.1-alpha.8) (2023-06-26)
+
 ### [0.0.1-alpha.7](https://gitlab.alibaba-inc.com/mmfs/thx-scripts/compare/v0.0.1-alpha.6...v0.0.1-alpha.7) (2023-06-21)
 
 

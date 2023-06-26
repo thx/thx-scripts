@@ -1,6 +1,6 @@
 {
   "name": "thx-scripts",
-  "version": "0.0.1-alpha.7",
+  "version": "0.0.1-alpha.8",
   "description": "微前端构建工具，内置支持 Webpack5 模块邦联。",
   "keywords": [
     "micro-frontends-solution",
