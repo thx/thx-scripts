@@ -41,7 +41,7 @@ export function factory (appConfig?: Configuration, appConfigIndex?: number, app
     //   'MM_MODE': MM_MODE || 'production'
     // }),
     new DefinePlugin({
-    // MO TODO 按需补充
+      // MO TODO 按需补充
       'process.platform': JSON.stringify(process.platform),
       'process.env': JSON.stringify(process.env),
       'process.env.NODE_ENV': JSON.stringify(NODE_ENV || 'production'),
